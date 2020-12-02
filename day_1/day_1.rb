@@ -28,15 +28,25 @@ lines = FileUtil.new("input.txt").lines_as_integers
 # ]
 
 TARGET_NUMBER = 2020
-result = lines.reduce({}) do |acc, num|
+
+part_one_result = lines.reduce({}) do |acc, num|
   complement = TARGET_NUMBER - num
-  if acc[num]
-    break num * complement
-  else
-    acc[complement] = num
-  end
+  break num * complement if acc[num]
+
+  acc[complement] = num
   acc
 end
 
-puts "Result: #{result}"
+puts "Part One Result: #{part_one_result}"
 
+# I feel dirty...
+lines.each_with_index do |outer_val, outer_index|
+  lines.each_with_index do |middle_val, middle_index|
+    lines.each_with_index do |inner_val, inner_index|
+      if outer_val + middle_val + inner_val == TARGET_NUMBER
+        puts "Part Two Result: #{outer_val} * #{middle_val} * #{inner_val} = #{outer_val * middle_val * inner_val}"
+        raise
+      end
+    end
+  end
+end
