@@ -1,22 +1,6 @@
-class FileUtil
+require_relative "../file_loader.rb"
 
-  def initialize(filename)
-    @filename = filename
-  end
-
-  def lines_as_integers
-    file.each_line.map(&:to_i)
-  end
-
-  private
-
-  def file
-    File.open(@filename)
-  end
-end
-
-
-lines = FileUtil.new("input.txt").lines_as_integers
+lines = FileLoader.new("./day_1/input.txt").lines(->(x) { x.to_i })
 
 # test_lines = [
 #   1721,
