@@ -37,4 +37,18 @@ class TicketDecoder
   end
 end
 
-puts "Part 1 answer: #{all_lines.map {|ticket_code| TicketDecoder.seat_number(ticket_code) }.max}"
+all_seat_codes = all_lines.map {|ticket_code| TicketDecoder.seat_number(ticket_code) }
+puts "Part 1 answer: #{all_seat_codes.max}" # 980
+
+sorted_codes = all_seat_codes.sort
+prev = sorted_codes[0]
+sorted_codes[1..].each do |sc|
+  if sc != prev + 1
+    puts "Part 2 answer: #{sc -1}"
+    break
+  else
+    prev = sc
+  end
+end
+
+# 608
